@@ -1,0 +1,14 @@
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+<mat-form-field appearance="fill">
+  <mat-label for="seed">Seed</mat-label>
+  <input id="seed" matInput formControlName="seed">
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label for="truncation">Truncation</mat-label>
+  <input id="truncation" matInput formControlName="truncation">
+</mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Generate</button>
+
+</form>

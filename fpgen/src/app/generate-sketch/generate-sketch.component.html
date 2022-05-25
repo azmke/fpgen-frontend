@@ -1,0 +1,11 @@
+<h1 style="text-align: center">
+        <image-drawing [width]="width" [height]="height"
+                       borderCss="1px solid black"
+                       [showCancelButton]="false"
+                       [enableLoadAnotherImage]="true" [enableRemoveImage]="true"
+                       (save)="saveBtn($event)"
+                       [i18n]="i18n"
+                       [locale]="locale"
+                       [drawingSizes]="{ small: 5, medium: 10, large: 25, extra: 50 }"
+        >
+  </image-drawing>

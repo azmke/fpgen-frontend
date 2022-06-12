@@ -1,11 +1,17 @@
-<h1 style="text-align: center">
-        <image-drawing [width]="width" [height]="height"
-                       borderCss="1px solid black"
-                       [showCancelButton]="false"
-                       [enableLoadAnotherImage]="true" [enableRemoveImage]="true"
-                       (save)="saveBtn($event)"
-                       [i18n]="i18n"
-                       [locale]="locale"
-                       [drawingSizes]="{ small: 5, medium: 10, large: 25, extra: 50 }"
-        >
-  </image-drawing>
+  <div class="card-container">
+    <div>
+        <canvas
+        (mousedown)="generateArrow()"
+        id="canvasID"
+        width="400"
+        height="620"
+        style="border: 1px solid black"
+      ></canvas>
+    </div>
+    <br>
+    <div id="controls">
+      <button (click)="generateArrow()" mat-raised-button color="primary">+ Add Minutie</button>
+
+  <i id="clear" class="feather icon-trash"></i>
+  </div>
+</div>

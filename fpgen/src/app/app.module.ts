@@ -12,6 +12,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { ImageDrawingModule } from 'ngx-image-drawing';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [AppComponent, GenerateFormComponent, GenerateSketchComponent],
@@ -22,6 +24,8 @@ import { ImageDrawingModule } from 'ngx-image-drawing';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    MatSliderModule,
+    MatSlideToggleModule,
     MatButtonModule,
     MatInputModule,
     ImageDrawingModule,

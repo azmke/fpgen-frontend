@@ -9,6 +9,8 @@ import { Line, Object } from 'fabric/fabric-impl';
   styleUrls: ['./generate-sketch.component.scss'],
 })
 export class GenerateSketchComponent implements OnInit {
+  minuteSlideCheck: boolean = false;
+  arrowColor = 'black';
   myCanvas: any;
   image = new Image();
   //url: string;
@@ -26,6 +28,7 @@ export class GenerateSketchComponent implements OnInit {
 
   ngOnInit(): void {
     this.canvas = new fabric.Canvas('canvasID', { fireRightClick: true });
+
     // this.polygon = new fabric.Polygon(this.points, {
     //   left: 0,
     //   top: 0,
@@ -42,80 +45,86 @@ export class GenerateSketchComponent implements OnInit {
   }
   isDown!: boolean;
   line!: Object;
+  public toggleChange(event: any) {
+    this.minuteSlideCheck = !this.minuteSlideCheck;
+  }
+  public generateArrowWithPoint(pointer: { x: number; y: number }) {
+    this.isDown = true;
+    // var pointer = this.canvas.getPointer(o.e);
+    this.points = [pointer.x, pointer.y, pointer.x, pointer.y];
+
+    let tox = pointer.x;
+    let toy = pointer.y;
+    this.fromx = tox - 10;
+    this.fromy = toy - 10;
+    //this.drawArrow(startX, startY, endX, endY);
+
+    var angle = Math.atan2(toy - this.fromy, tox - this.fromx);
+
+    var headlen = 3; // arrow head size
+
+    // bring the line end back some to account for arrow head.
+    tox = tox - headlen * Math.cos(angle);
+    toy = toy - headlen * Math.sin(angle);
+
+    // calculate the points.
+    var newPoints = [
+      {
+        x: this.fromx, // start point
+        y: this.fromy,
+      },
+      {
+        x: this.fromx - (headlen / 4) * Math.cos(angle - Math.PI / 2),
+        y: this.fromy - (headlen / 4) * Math.sin(angle - Math.PI / 2),
+      },
+      {
+        x: tox - (headlen / 4) * Math.cos(angle - Math.PI / 2),
+        y: toy - (headlen / 4) * Math.sin(angle - Math.PI / 2),
+      },
+      {
+        x: tox - headlen * Math.cos(angle - Math.PI / 2),
+        y: toy - headlen * Math.sin(angle - Math.PI / 2),
+      },
+      {
+        x: tox + headlen * Math.cos(angle), // tip
+        y: toy + headlen * Math.sin(angle),
+      },
+      {
+        x: tox - headlen * Math.cos(angle + Math.PI / 2),
+        y: toy - headlen * Math.sin(angle + Math.PI / 2),
+      },
+      {
+        x: tox - (headlen / 4) * Math.cos(angle + Math.PI / 2),
+        y: toy - (headlen / 4) * Math.sin(angle + Math.PI / 2),
+      },
+      {
+        x: this.fromx - (headlen / 4) * Math.cos(angle + Math.PI / 2),
+        y: this.fromy - (headlen / 4) * Math.sin(angle + Math.PI / 2),
+      },
+      {
+        x: this.fromx,
+        y: this.fromy,
+      },
+    ];
+
+    this.line = new fabric.Polyline(newPoints, {
+      fill: this.arrowColor, //'white',
+      stroke: this.arrowColor, //'black',
+      opacity: 1,
+      strokeWidth: 1,
+      originX: 'left',
+      originY: 'top',
+      selectable: true,
+    });
+    this.canvas.add(this.line);
+  }
   public ngAfterViewInit() {
-    this.canvas.on('mouse:down', (o:any) => {
-      this.isDown = true;
-      var pointer = this.canvas.getPointer(o.e);
-      this.points = [
-        pointer.x,
-        pointer.y,
-        pointer.x,
-        pointer.y,
-      ];
-
-        let tox = pointer.x;
-      let toy = pointer.y;
-      this.fromx = tox -10;
-      this.fromy = toy - 10;
-        //this.drawArrow(startX, startY, endX, endY);
-
-        var angle = Math.atan2(toy - this.fromy, tox - this.fromx);
-
-        var headlen = 3; // arrow head size
-
-        // bring the line end back some to account for arrow head.
-        tox = tox - headlen * Math.cos(angle);
-        toy = toy - headlen * Math.sin(angle);
-
-        // calculate the points.
-        var newPoints = [
-          {
-            x: this.fromx, // start point
-            y: this.fromy,
-          },
-          {
-            x: this.fromx - (headlen / 4) * Math.cos(angle - Math.PI / 2),
-            y: this.fromy - (headlen / 4) * Math.sin(angle - Math.PI / 2),
-          },
-          {
-            x: tox - (headlen / 4) * Math.cos(angle - Math.PI / 2),
-            y: toy - (headlen / 4) * Math.sin(angle - Math.PI / 2),
-          },
-          {
-            x: tox - headlen * Math.cos(angle - Math.PI / 2),
-            y: toy - headlen * Math.sin(angle - Math.PI / 2),
-          },
-          {
-            x: tox + headlen * Math.cos(angle), // tip
-            y: toy + headlen * Math.sin(angle),
-          },
-          {
-            x: tox - headlen * Math.cos(angle + Math.PI / 2),
-            y: toy - headlen * Math.sin(angle + Math.PI / 2),
-          },
-          {
-            x: tox - (headlen / 4) * Math.cos(angle + Math.PI / 2),
-            y: toy - (headlen / 4) * Math.sin(angle + Math.PI / 2),
-          },
-          {
-            x: this.fromx - (headlen / 4) * Math.cos(angle + Math.PI / 2),
-            y: this.fromy - (headlen / 4) * Math.sin(angle + Math.PI / 2),
-          },
-          {
-            x: this.fromx,
-            y: this.fromy,
-          },
-        ];
-
-        this.line = new fabric.Polyline(newPoints, {
-          fill: 'black', //'white',
-          stroke: 'black', //'black',
-          opacity: 1,
-          strokeWidth: 1,
-          originX: 'left',
-          originY: 'top',
-          selectable: true,
-        });
+    this.canvas.on('mouse:down', (o: any) => {
+      console.log('wefEW', this.minuteSlideCheck);
+      if (this.minuteSlideCheck) {
+        var pointer = this.canvas.getPointer(o.e);
+        this.generateArrowWithPoint(pointer);
+      }
 
       ////////////
       // var triangle = new fabric.Triangle({
@@ -151,10 +160,9 @@ export class GenerateSketchComponent implements OnInit {
       //   originX: 'left',
       //   originY: 'center',
       // });
-      this.canvas.add(this.line);
     });
 
-    this.canvas.on('mouse:move', (o:any) => {
+    this.canvas.on('mouse:move', (o: any) => {
       if (!this.isDown) return;
       var pointer = this.canvas.getPointer(o.e);
 
@@ -293,34 +301,74 @@ export class GenerateSketchComponent implements OnInit {
       this.canvas.add(this.polygon);
     }
   }
+  url!: string;
+  public selectFile(event: any) {
+    var canvas = this.canvas;
+    if (event.target.files) {
+      var reader = new FileReader();
+      let file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = (event: any) => {
+        this.url = event.target.result;
+        // this.canvas.setHeight(720);
+        // this.canvas.setWidth(1280);
+        fabric.Image.fromURL(this.url, function (img: any) {
+          canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+            scaleX: canvas.width / img.width,
+            scaleY: canvas.height / img.height,
+            opacity: 0.4,
+          });
+        });
+      };
+      this.isImageDrawn = true;
+    }
+  }
   public generateArrow() {
-    console.log('FREGERGddd');
-
-    var triangle = new fabric.Triangle({
-      width: 10,
-      height: 15,
-      fill: 'black',
-      left: 50,
-      top: 10,
-      angle: 90,
+    this.generateArrowWithPoint({
+      x: this.canvas.width / 2,
+      y: this.canvas.height / 2,
     });
+    // console.log('FREGERGddd');
 
-    var line = new fabric.Line([50, 10, 200, 10], {
-      left: 75,
-      strokeWidth: 1,
-      width: 1,
-      height: 1,
-      top: 70,
-      stroke: 'black',
-    });
+    // var triangle = new fabric.Triangle({
+    //   width: 10,
+    //   height: 15,
+    //   fill: this.arrowColor,
+    //   left: 50,
+    //   top: 10,
+    //   angle: 90,
+    // });
 
-    var objs = [line, triangle];
+    // var line = new fabric.Line([50, 10, 200, 10], {
+    //   left: 75,
+    //   strokeWidth: 1,
+    //   width: 1,
+    //   height: 1,
+    //   top: 70,
+    //   stroke: 'black',
+    // });
 
-    var alltogetherObj = new fabric.Group(objs);
-    this.canvas.add(alltogetherObj);
+    // var objs = [line, triangle];
+
+    // var alltogetherObj = new fabric.Group(objs);
+    // this.canvas.add(alltogetherObj);
   }
   public saveBtn($event: any) {
     // saveAs($event, 'image.jpg');
     //TODO: call backend server
+  }
+  ChangeColorToBlack() {
+    this.arrowColor = 'black';
+  }
+  ChangeColorToWhite() {
+    this.arrowColor = 'white';
+  }
+  deleteSelectedObjects() {
+    if (this.canvas.getActiveObject()) {
+      this.canvas.getActiveObjects().forEach( (element:any) => {
+      this.canvas.remove(element);
+      });
+
+    }
   }
 }

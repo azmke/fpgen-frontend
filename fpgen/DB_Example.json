@@ -1,0 +1,16 @@
+{
+    "name": "model1",
+    "type": "StyleGAN",
+    "params": [
+        {
+            "name": "seed",
+            "type": "number",
+            "required": true
+        },
+        {
+            "name": "truncation",
+            "type": "number",
+            "required": true
+        }
+    ]
+}

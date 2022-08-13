@@ -1,20 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GenerateFormComponent } from './generate-form.component';
+import { GenerateWithStyleGan2 } from './GenerateWithStyleGan2';
 
 describe('GenerateFormComponent', () => {
-  let component: GenerateFormComponent;
-  let fixture: ComponentFixture<GenerateFormComponent>;
+  let component: GenerateWithStyleGan2;
+  let fixture: ComponentFixture<GenerateWithStyleGan2>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GenerateFormComponent ]
-    })
-    .compileComponents();
+      declarations: [GenerateWithStyleGan2],
+    }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GenerateFormComponent);
+    fixture = TestBed.createComponent(GenerateWithStyleGan2);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

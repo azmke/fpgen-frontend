@@ -23,7 +23,7 @@
       <section>
       <mat-slide-toggle
       color="primary"
-          (toggleChange)="toggleChange($event)"
+          (toggleChange)="toggleMinuteChange($event)"
           >
         Add Minutie with mouse click.
       </mat-slide-toggle>
@@ -39,6 +39,15 @@
         <button style="margin-top: 30px;" (click)="deleteSelectedObjects()" mat-raised-button color="warn">Delete selected objects</button>
 
       </section>
+      <section>
+      <mat-slide-toggle
+      color="primary"
+          (toggleChange)="toggleGpuChange($event)"
+          >
+        Gpu
+      </mat-slide-toggle>
+      </section>
+
 
       <i id="clear" class="feather icon-trash"></i>
     </div>

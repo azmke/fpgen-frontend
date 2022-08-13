@@ -320,10 +320,16 @@
   <h3>Please select the way you want to generate the fingerprint</h3>
 
   <div class="card-container">
-    <a class="card" rel="noopener" [routerLink]="['/generate-with-form']">
-      <span>Generate with GAN</span>
+    <a class="card" rel="noopener" [routerLink]="['/generate-with-pggan']">
+      <span>Generate with pggan</span>
     </a>
-    <a class="card" rel="noopener"  [routerLink]="['/generate-with-sketch']">
+    <a class="card" rel="noopener" [routerLink]="['/generate-with-stylegan']">
+      <span>Generate with stylegan</span>
+    </a>
+        <a class="card" rel="noopener" [routerLink]="['/generate-with-stylegan2']">
+      <span>Generate with stylegan2</span>
+    </a>
+    <a class="card" rel="noopener"  [routerLink]="['/generate-with-pix2pix']">
       <span>Generate with pix2pix</span>
     </a>
 

@@ -24,6 +24,8 @@ export class GenerateSketchComponent implements OnInit {
 
   fromx!: number;
   fromy!: number;
+
+  gpu: boolean = false;
   constructor() {}
 
   ngOnInit(): void {
@@ -45,9 +47,14 @@ export class GenerateSketchComponent implements OnInit {
   }
   isDown!: boolean;
   line!: Object;
-  public toggleChange(event: any) {
+  public toggleMinuteChange(event: any) {
     this.minuteSlideCheck = !this.minuteSlideCheck;
   }
+
+  public toggleGpuChange(event: any) {
+  this.gpu = !this.gpu;
+  }
+
   public generateArrowWithPoint(pointer: { x: number; y: number }) {
     this.isDown = true;
     // var pointer = this.canvas.getPointer(o.e);

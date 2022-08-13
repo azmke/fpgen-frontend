@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { GenerateFormComponent } from './generate-form/generate-form.component';
+import { GenerateWithStyleGan2 } from './generate-form/GenerateWithStyleGan2';
 import { GenerateSketchComponent } from './generate-sketch/generate-sketch.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,9 +14,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { ImageDrawingModule } from 'ngx-image-drawing';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
+import { GenerateWithPgganComponent } from './generate-with-pggan/generate-with-pggan.component';
+import { GenerateWithStyleGanComponent } from './generate-with-style-gan/generate-with-style-gan.component';
 
 @NgModule({
-  declarations: [AppComponent, GenerateFormComponent, GenerateSketchComponent],
+  declarations: [
+    AppComponent,
+    GenerateWithStyleGan2,
+    GenerateSketchComponent,
+    GenerateWithPgganComponent,
+    GenerateWithStyleGanComponent,
+  ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,

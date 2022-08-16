@@ -4,8 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Run from docker 
 ```
-docker build -t fpgen-frontend
-docker run -p 80:80 pgen-frontend
+docker build -t fpgen-frontend .
+docker run -p 80:80 fpgen-frontend
 ```
 ## Development server
 

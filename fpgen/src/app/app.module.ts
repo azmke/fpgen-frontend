@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,7 +11,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
-import { ImageDrawingModule } from 'ngx-image-drawing';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { GenerateWithPgganComponent } from './generate-with-pggan/generate-with-pggan.component';
@@ -36,10 +35,11 @@ import { GenerateWithStyleGanComponent } from './generate-with-style-gan/generat
     MatSlideToggleModule,
     MatButtonModule,
     MatInputModule,
-    ImageDrawingModule,
     MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+
 })
 export class AppModule {}

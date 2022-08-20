@@ -1,5 +1,5 @@
 import { ThisReceiver } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { fabric } from 'fabric';
 import { Line, Object } from 'fabric/fabric-impl';
 
@@ -26,6 +26,10 @@ export class GenerateSketchComponent implements OnInit {
   fromy!: number;
 
   gpu: boolean = false;
+  backgroundWidth?: number;
+  backgroundLength?: number;
+  @Output() submit: EventEmitter<any> = new EventEmitter();
+
   constructor() {}
 
   ngOnInit(): void {
@@ -52,7 +56,7 @@ export class GenerateSketchComponent implements OnInit {
   }
 
   public toggleGpuChange(event: any) {
-  this.gpu = !this.gpu;
+    this.gpu = !this.gpu;
   }
 
   public generateArrowWithPoint(pointer: { x: number; y: number }) {
@@ -298,6 +302,21 @@ export class GenerateSketchComponent implements OnInit {
     //   // this.generateArrow()
     // });
   }
+  generate() {
+    const image = new fabric.Image('');
+    this.canvas.setBackgroundImage(
+      image,
+      this.canvas.renderAll.bind(this.canvas)
+    );
+    this.canvas.getElement().toBlob((blob: any) => {
+
+      this.submit.emit({
+        data: { gpu: this.gpu },
+        image: blob,
+        type: 'pix2pix',
+      });
+    });
+  }
   getClickCoords(event: any) {
     if (this.isCanvasDrawn && this.isImageDrawn) {
       this.newPt = {
@@ -320,6 +339,8 @@ export class GenerateSketchComponent implements OnInit {
         // this.canvas.setHeight(720);
         // this.canvas.setWidth(1280);
         fabric.Image.fromURL(this.url, function (img: any) {
+          canvas.setWidth(img.width);
+          canvas.setHeight(img.height);
           canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
             scaleX: canvas.width / img.width,
             scaleY: canvas.height / img.height,
@@ -372,10 +393,9 @@ export class GenerateSketchComponent implements OnInit {
   }
   deleteSelectedObjects() {
     if (this.canvas.getActiveObject()) {
-      this.canvas.getActiveObjects().forEach( (element:any) => {
-      this.canvas.remove(element);
+      this.canvas.getActiveObjects().forEach((element: any) => {
+        this.canvas.remove(element);
       });
-
     }
   }
 }

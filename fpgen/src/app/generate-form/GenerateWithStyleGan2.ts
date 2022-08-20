@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { GeneratorByFormService } from '../services/generator-by-form.service';
 import { GenerateFormData } from '../types/generateFormData';
 
 @Component({
@@ -14,9 +13,9 @@ export class GenerateWithStyleGan2 implements OnInit {
     truncation: '',
   });
   gpu: boolean = false;
+  @Output() submit: EventEmitter<any> = new EventEmitter();
 
   constructor(
-    private generatorByFormService: GeneratorByFormService,
     private formBuilder: FormBuilder
   ) {}
 
@@ -28,8 +27,6 @@ export class GenerateWithStyleGan2 implements OnInit {
 
   onSubmit(): void {
     const data = this.checkoutForm.value;
-    this.generatorByFormService.generateImage(data).subscribe((response) => {
-      //TODO: render image
-    });
+    this.submit.emit({ data: { ...data, gpu: this.gpu }, type: 'stylegan' } );
   }
 }

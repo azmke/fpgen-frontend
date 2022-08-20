@@ -16,6 +16,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { GenerateWithPgganComponent } from './generate-with-pggan/generate-with-pggan.component';
 import { GenerateWithStyleGanComponent } from './generate-with-style-gan/generate-with-style-gan.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { GenerateWithStyleGanComponent } from './generate-with-style-gan/generat
     MatSlideToggleModule,
     MatButtonModule,
     MatInputModule,
+    MatSelectModule,
     ImageDrawingModule,
     MatFormFieldModule,
   ],

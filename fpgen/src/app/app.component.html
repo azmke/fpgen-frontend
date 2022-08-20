@@ -320,7 +320,20 @@
   <h3>Please select the way you want to generate the fingerprint</h3>
 
   <div class="card-container">
-    <a class="card" rel="noopener" [routerLink]="['/generate-with-pggan']">
+    <mat-form-field appearance="fill">
+    <mat-label>Select an option</mat-label>
+    <mat-select [(value)]="selected">
+      <mat-option>None</mat-option>
+      <mat-option value="stylegan2">Stylegen 2</mat-option>
+      <mat-option value="stylegan">Stylegan</mat-option>
+      <mat-option value="pix2pix">pix2pix</mat-option>
+      <mat-option value="pggan">pggan</mat-option>
+      <!-- <mat-option value="stylegan2ada">stylegan2ada</mat-option> -->
+
+    </mat-select>
+    </mat-form-field>
+
+    <!-- <a class="card" rel="noopener" [routerLink]="['/generate-with-pggan']">
       <span>Generate with pggan</span>
     </a>
     <a class="card" rel="noopener" [routerLink]="['/generate-with-stylegan']">
@@ -331,11 +344,29 @@
     </a>
     <a class="card" rel="noopener"  [routerLink]="['/generate-with-pix2pix']">
       <span>Generate with pix2pix</span>
-    </a>
+    </a> -->
 
   </div>
-  <hr>
-<router-outlet></router-outlet>
+  <br>
+    <hr>
+
+  <div>
+        <app-generate-form (submit)="submit($event)" *ngIf="selected=='stylegan2'"></app-generate-form>
+        <app-generate-sketch (submit)="submit($event)" *ngIf="selected=='pix2pix'"></app-generate-sketch>
+        <app-generate-with-pggan (submit)="submit($event)" *ngIf="selected=='pggan'"></app-generate-with-pggan>
+        <app-generate-with-style-gan (submit)="submit($event)" *ngIf="selected=='stylegan'"></app-generate-with-style-gan>
+
+  </div>
+
+  <div *ngIf="imageBlobUrl">
+    <br>
+    <hr>
+
+    <h2>Result Fingerprint:</h2>
+    <img *ngIf="imageBlobUrl" [src]="imageBlobUrl" width="500px" height="500px" />
+
+  </div>
+<!-- <router-outlet></router-outlet> -->
 
 </div>
 

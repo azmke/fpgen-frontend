@@ -1,55 +1,61 @@
   <div class="mat-card-content">
         <section class="flex-section">
 
-    <div class = "col">
-        <canvas
-        (mousedown)="generateArrow()"
-        id="canvasID"
-        width="400"
-        height="620"
-        style="border: 1px solid black"
-      ></canvas>
-    </div>
-    <div class = "config">
-      <section>
-        <input style="margin-bottom: 10px;" mat-raised-button color="primary" type="file" id="file" (change)="selectFile($event)">
+          <div class = "col">
+              <canvas
+              (mousedown)="generateArrow()"
+              id="canvasID"
+              width="400"
+              height="620"
+              style="border: 1px solid black"
+            ></canvas>
+          </div>
+          <div class = "config">
+            <section>
+              <input style="margin-bottom: 10px;" mat-raised-button color="primary" type="file" id="file" (change)="selectFile($event)">
 
-      </section>
-      <!-- <mat-slide-toggle>Slide me!</mat-slide-toggle> -->
-      <section>
-      <button (click)="generateArrow()" mat-raised-button color="primary">+ Add Minutie</button>
+            </section>
+            <!-- <mat-slide-toggle>Slide me!</mat-slide-toggle> -->
+            <section>
+            <button (click)="generateArrow()" mat-raised-button color="primary">+ Add Minutie</button>
 
-      </section>
-      <section>
-      <mat-slide-toggle
-      color="primary"
-          (toggleChange)="toggleMinuteChange($event)"
-          >
-        Add Minutie with mouse click.
-      </mat-slide-toggle>
-      </section>
-      <section>
-        <label >Color:</label>
+            </section>
+            <section>
+            <mat-slide-toggle
+            color="primary"
+                (toggleChange)="toggleMinuteChange($event)"
+                >
+              Add Minutie with mouse click.
+            </mat-slide-toggle>
+            </section>
+            <section>
+              <label >Color:</label>
 
-      <button (click)="ChangeColorToBlack()" class="color-button" style="background-color: black;" mat-raised-button color="black"></button>
-      <button (click)="ChangeColorToWhite()" class="color-button"  style="background-color: white;" mat-raised-button color="black"></button>
+            <button (click)="ChangeColorToBlack()" class="color-button" style="background-color: black;" mat-raised-button color="black"></button>
+            <button (click)="ChangeColorToWhite()" class="color-button"  style="background-color: white;" mat-raised-button color="black"></button>
 
-      </section>
-      <section>
-        <button style="margin-top: 30px;" (click)="deleteSelectedObjects()" mat-raised-button color="warn">Delete selected objects</button>
+            </section>
+            <section>
+              <button style="margin-top: 30px;" (click)="deleteSelectedObjects()" mat-raised-button color="warn">Delete selected objects</button>
 
-      </section>
-      <section>
-      <mat-slide-toggle
-      color="primary"
-          (toggleChange)="toggleGpuChange($event)"
-          >
-        Gpu
-      </mat-slide-toggle>
-      </section>
+            </section>
 
 
-      <i id="clear" class="feather icon-trash"></i>
-    </div>
+            <section>
+            <mat-slide-toggle
+            color="primary"
+                (toggleChange)="toggleGpuChange($event)"
+                >
+              Gpu
+            </mat-slide-toggle>
+            </section>
+
+              <section>
+          <button style="margin-top: 30px;" mat-raised-button color="primary" (click)="generate()">Generate</button>
+
+            </section>
+            <i id="clear" class="feather icon-trash"></i>
+          </div>
+
     </section>
 </div>
